@@ -42,6 +42,7 @@ services:
 
       depends_on:
         - api
+        - nginx-proxy
       command: certonly --webroot -w /var/www/certbot --force-renewal --email {email} -d {domain} --agree-tos
 
 
