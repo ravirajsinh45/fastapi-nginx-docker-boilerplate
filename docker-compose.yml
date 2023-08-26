@@ -3,23 +3,38 @@ version: '3'
 services:
 
   api:
-    build: ./
-    image: test_api
-    command: uvicorn app:app --workers 1 --host 0.0.0.0 --port 8080
-    ports:
-      - 8080:8080
-    restart: always
+      build: ./
+      image: test_api
+      command: uvicorn app:app --workers 1 --host 0.0.0.0 --port 8080
+      ports:
+        - 8080:8080
+      restart: always
+      networks:
+        my-network:
+          aliases:
+          - fast-api
+        
+     
 
 
   nginx-proxy:
-    image: nginx:alpine
+      image: nginx:alpine
 
-    ports:
-      - "80:80"
-    depends_on:
-      - api
-    volumes:
-      - ./data/nginx/app.conf:/etc/nginx/conf.d/default.conf
+      ports:
+        - "80:80"
+      depends_on:
+        - api
+      volumes:
+        - ./data/nginx/app.conf:/etc/nginx/conf.d/default.conf
+      networks:
+        - my-network
+
 
   # certbot:
   #   image: certbot/certbot
+
+networks:
+    my-network:
+      
+      
+    
