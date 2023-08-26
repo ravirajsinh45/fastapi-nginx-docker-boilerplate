@@ -38,10 +38,11 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
+     
 
     depends_on:
       - api
-    command: certonly  --email example@your_domain --agree-tos --no-eff-email --staging -d your_domain  -d www.your_domain #make your custom change
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email {email} -d {domain} --agree-tos
 
 
 networks:
