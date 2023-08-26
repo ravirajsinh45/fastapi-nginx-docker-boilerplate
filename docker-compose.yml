@@ -13,6 +13,8 @@ services:
 
   nginx-proxy:
     image: nginx:alpine
+
+    ports:
       - "80:80"
     depends_on:
       - api
