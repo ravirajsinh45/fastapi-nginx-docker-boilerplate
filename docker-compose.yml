@@ -42,8 +42,7 @@ services:
 
       depends_on:
         - api
-        - nginx-proxy
-      command: certonly --webroot -w /var/www/certbot --force-renewal --email {email} -d {domain} --agree-tos
+      command: certonly --webroot -w /var/www/certbot --staging --email {email} -d {domain} --agree-tos # make change to your email and domain
 
 
 networks:
